@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; /* Importacion de React del paquete react */
 import transformWeather from '../../services/transformWeather';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import { api_weather } from './../../constants/api_url';
@@ -37,7 +38,7 @@ class WeatherLocation extends Component {   /* se define la constante WeatherLoc
         return (
         <div className="weatherLocationCont">
             <Location city={city}></Location>
-            {data ? <WeatherData data={data}></WeatherData> : "Cargando......"}
+            {data ? <WeatherData data={data}></WeatherData> : <CircularProgress/>}
         </div>);
     }
 };
