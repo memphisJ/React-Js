@@ -4,21 +4,6 @@ import Location from './Location';
 import WeatherData from './WeatherData';
 import { api_weather } from './../../constants/api_url';
 import './styles.css';
-import {
-    CLOUD,
-    CLOUDY,
-    SUN,
-    RAIN,
-    SNOW,
-    WINDY
-} from '../../constants/weathers';
-
-const data = {
-    temperature: 10,
-    weatherState: SUN,
-    humidity: 50,
-    wind: '10 m/s',
-}
 
 class WeatherLocation extends Component {   /* se define la constante WeatherLocation  y se usa un Arrow Function que defien un functional component*/
     
@@ -26,9 +11,14 @@ class WeatherLocation extends Component {   /* se define la constante WeatherLoc
         super();
         this.state = {
             city: "La Paz",
-            data: data,
+            data: null,
         }
     }
+
+    componentDidMount() {
+        this.handleUpdateClick();
+    }
+    
 
     handleUpdateClick = () => {
         fetch(api_weather).then( resolve => {
@@ -47,8 +37,7 @@ class WeatherLocation extends Component {   /* se define la constante WeatherLoc
         return (
         <div className="weatherLocationCont">
             <Location city={city}></Location>
-            <WeatherData data={data}></WeatherData>
-            <button onClick={this.handleUpdateClick}>Actualizar</button>
+            {data ? <WeatherData data={data}></WeatherData> : "Cargando......"}
         </div>);
     }
 };
